@@ -29,24 +29,8 @@ console.log(getX.value);
 
 });
 
-app.post('/getValue', async (req, res) => {
-    console.log('Got body:', req.body);
-
-const hash = new Hash({
-    id: req.body.id,
-    hash: req.body.hash,
-    value:req.body.value
-});
-try{
-    console.log(hash);
-    const saveHash = await hash.save();
-}catch(err){
-    res.status(400).send(err);
-}
-
-    res.send(req.body);
-    
-   
+app.get('/', (req,res) => {
+res.send('Hello Word!');
 });
 
 
