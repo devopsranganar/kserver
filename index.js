@@ -2,7 +2,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 var cors = require('cors');
- 
+const https = require('https');
+const fs = require('fs')
+
+var key = fs.readFileSync(__dirname + '/certs/example.com.key');
+var cert = fs.readFileSync(__dirname + '/certs/example.com.crt');
+var options = {
+  key: key,
+  cert: cert
+};
+
 const Schema = mongoose.Schema;
 const hash = new Schema({
     id: { type: String   },
@@ -30,4 +39,8 @@ res.send('Hello Word!');
 });
 
 
-app.listen(PORT,() =>{console.log(`'serrver is running on port:'${PORT}`)})
+var server = https.createServer(options, app);
+
+server.listen(PORT, () => {
+  console.log("server starting on port : " + PORT)
+});
