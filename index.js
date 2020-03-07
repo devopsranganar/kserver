@@ -7,7 +7,7 @@ const fs = require('fs')
 
 //SSL Certficate 
 var key = fs.readFileSync(__dirname + '/certs/example.com.key');
-var cert = fs.readFileSync(__dirname + '/certs/example.com.crt');
+var cert = fs.readFileSync(__dirname + '/certs/example.com.cert');
 var options = {
   key: key,
   cert: cert
@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // app path htt://siteurl:3000/xvalue/X
 
-app.get('/xvalue/:valueId', async (req,res) => {
+app.get('/xvalue/:valueId', (req,res) => {
     var xval = parseInt(req.params.valueId.toString());
     var yval = xval+1;
     res.send(yval.toString());
