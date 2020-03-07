@@ -37,8 +37,8 @@ console.log(req.params.valueId);
  // const getX = await Hash.findOne({id:req.params.valueId}).then((result) =>{ return result.toJSON();})
 var getx = parseInt(req.params.valueId);
 var getY = getx+1;
-console.log(gety);
-   if(getx) return res.send(gety);
+console.log(getY);
+   if(getx) return res.send(getY);
   });
   
 app.get('/', (req,res) => {
