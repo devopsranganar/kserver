@@ -35,7 +35,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/xvalue/:valueId', async (req,res) => {
 console.log(req.params.valueId);
  // const getX = await Hash.findOne({id:req.params.valueId}).then((result) =>{ return result.toJSON();})
-var getx = req.params.valueId.toString();
+var getx = parseInt(req.params.valueId);
 var getY = getx+1;
 console.log(gety);
    if(getx) return res.send(gety);
