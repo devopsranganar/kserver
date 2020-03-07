@@ -1,10 +1,11 @@
+//Core lib imported 
 const express = require('express');
 const bodyParser = require('body-parser');
-//const mongoose = require('mongoose');
 var cors = require('cors');
 const https = require('https');
 const fs = require('fs')
 
+//SSL Certficate 
 var key = fs.readFileSync(__dirname + '/certs/example.com.key');
 var cert = fs.readFileSync(__dirname + '/certs/example.com.crt');
 var options = {
@@ -12,42 +13,31 @@ var options = {
   cert: cert
 };
 
-//const Schema = mongoose.Schema;
-//const hash = new Schema({
-//    id: { type: String   },
- //   hash: { type: String },
- //   value:{type:Number}
-//});
-//const Hash =  mongoose.model('Hash', hash);
-
+//initializing the  express and application port 
 const PORT =3000;
 const app = express();
 
+//initializing the middleware  cors  and bodyparser 
 app.use(cors());
-
-//mongoose.connect('mongodb+srv://devops:rq6ve2dr@cluster0-40smv.mongodb.net/test?retryWrites=true&w=majority', () =>{console.log('conected to DB')});
-
-
 app.use(bodyParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// app path htt://siteurl:3000/xvalue/X
 
 app.get('/xvalue/:valueId', async (req,res) => {
-console.log(req.params.valueId);
- // const getX = await Hash.findOne({id:req.params.valueId}).then((result) =>{ return result.toJSON();})
-var getx = parseInt(req.params.valueId);
-var getY = getx+1;
-console.log(getY);
-   if(getx) return res.send(getY);
+    var xval = parseInt(req.params.valueId.toString());
+    var yval = xval+1;
+    res.send(yval.toString());
   });
-  
+//app path 
 app.get('/', (req,res) => {
 res.send('Hello Word!');
 });
 
-
+//creating https server 
 var server = https.createServer(options, app);
 
+//app listeing on port 
 server.listen(PORT, () => {
   console.log("server starting on port : " + PORT)
 });
